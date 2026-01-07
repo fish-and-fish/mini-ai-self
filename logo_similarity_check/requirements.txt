@@ -1,0 +1,14 @@
+# 原有依赖
+torch>=2.0.0
+torchvision>=0.15.0
+Pillow>=10.0.0
+opencv-python>=4.8.0
+scikit-learn>=1.3.0
+tqdm>=4.66.0
+numpy>=1.24.0
+pickle-mixin>=1.0.2
+
+# 新增API依赖
+fastapi>=0.104.1
+uvicorn>=0.24.0.post1
+python-multipart>=0.0.6

@@ -1,0 +1,22 @@
+# Python缓存文件
+__pycache__/
+*.py[cod]
+*.class
+*.so
+.Python
+env/
+venv/
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# 数据/模型文件（大文件，不上传）
+data/
+models/
+*.pkl
+
+# IDE配置文件（Pycharm）
+.idea/
+*.iml
+.DS_Store  # Mac系统隐藏文件
