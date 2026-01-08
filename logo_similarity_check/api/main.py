@@ -86,14 +86,16 @@ async def check_similarity_base64(request: SimilarityRequest):
         # 3. 计算相似度
         similarity = calculate_cosine_similarity(original_feature, compare_feature)
         is_similar = similarity >= SIMILARITY_THRESHOLD
+        is_similar_py = bool(is_similar)
 
         # 4. 构造返回结果
         result = {
             "similarity": round(float(similarity), 4),
-            "is_similar": is_similar,
+            "is_similar": is_similar_py,
             "threshold": SIMILARITY_THRESHOLD,
             "message": "图片相似度符合要求" if is_similar else "图片相似度不达标，可能上传错误"
         }
+        print(f"请求处理完成，result：{result}")
 
         return JSONResponse(content=result)
 

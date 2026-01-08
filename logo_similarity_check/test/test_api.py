@@ -3,8 +3,8 @@ import requests
 import argparse
 
 # API地址
-API_URL = "http://localhost:8091/api/check_similarity_base64"
-HEALTH_URL = "http://localhost:8091/health"
+API_URL = "http://localhost:8901/api/check_similarity_base64"
+HEALTH_URL = "http://localhost:8901/health"
 
 def image_to_base64(image_path):
     """将本地图片转为Base64字符串（不含data:image前缀）"""
@@ -83,4 +83,4 @@ if __name__ == "__main__":
 
     # 调用API
     # call_similarity_api(args.original, args.compare)
-    call_similarity_api("/Users/linglong/Downloads/test/image/1.jpg", "/Users/linglong/Downloads/test/image/1.jpg")
+    call_similarity_api("/Users/linglong/Downloads/test/image/1.jpg", "/Users/linglong/Downloads/test/image_duibi/1/red_cup/c82aaa87-cf8f-45bb-aa9b-fa8c3cdf5f1f2101269573.png")
