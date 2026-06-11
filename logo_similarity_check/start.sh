@@ -6,6 +6,8 @@ SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 PROJECT_DIR=$(cd "$SCRIPT_DIR/.." &>/dev/null && pwd)
 
 PORT=15903
+LOG_FILE="$PROJECT_DIR/service.log"
+PID_FILE="$PROJECT_DIR/service.pid"
 
 # 关闭指定端口上的进程（兼容Linux和macOS）
 echo "Stopping process on port $PORT..."
@@ -58,16 +60,29 @@ else
     echo "No process found on port $PORT"
 fi
 
-# 启动服务
-echo "Starting Logo Similarity Check Service on port $PORT..."
-cd "$PROJECT_DIR"
-
 # 查找可用的Python解释器
+PYTHON_CMD=""
 if command -v python &> /dev/null; then
-    python -m logo_similarity_check
+    PYTHON_CMD="python"
 elif command -v python3 &> /dev/null; then
-    python3 -m logo_similarity_check
+    PYTHON_CMD="python3"
 else
     echo "Error: Python interpreter not found"
     exit 1
 fi
+
+# 启动服务（后台运行）
+echo "Starting Logo Similarity Check Service on port $PORT..."
+echo "Log file: $LOG_FILE"
+
+cd "$PROJECT_DIR"
+
+# 后台运行服务，输出日志到文件
+nohup "$PYTHON_CMD" -m logo_similarity_check > "$LOG_FILE" 2>&1 &
+
+# 获取后台进程PID并保存
+SERVICE_PID=$!
+echo "$SERVICE_PID" > "$PID_FILE"
+
+echo "Service started in background with PID: $SERVICE_PID"
+echo "You can check logs with: tail -f $LOG_FILE"
