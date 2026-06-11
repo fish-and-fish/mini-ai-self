@@ -5,7 +5,7 @@ router = APIRouter()
 @router.get("/download/font")
 async def check_logo():
     return {
-        "result": True,
+        "result": False,
         "error_msg": ""
     }
 
